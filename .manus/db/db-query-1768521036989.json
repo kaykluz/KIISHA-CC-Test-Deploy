@@ -1,0 +1,52 @@
+{
+  "query": "SELECT country, COUNT(*) as asset_count, ROUND(SUM(capacityMw), 1) as total_mw, GROUP_CONCAT(DISTINCT assetClassification) as classifications FROM projects WHERE country IS NOT NULL GROUP BY country ORDER BY asset_count DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.root --database Zma8WcwtXEXyEaiSTraUQs --execute SELECT country, COUNT(*) as asset_count, ROUND(SUM(capacityMw), 1) as total_mw, GROUP_CONCAT(DISTINCT assetClassification) as classifications FROM projects WHERE country IS NOT NULL GROUP BY country ORDER BY asset_count DESC;",
+  "rows": [
+    {
+      "country": "Nigeria",
+      "asset_count": "12",
+      "total_mw": "36.8",
+      "classifications": "industrial,large_commercial,mini_grid"
+    },
+    {
+      "country": "Kenya",
+      "asset_count": "4",
+      "total_mw": "58.1",
+      "classifications": "large_commercial,industrial,grid_connected"
+    },
+    {
+      "country": "Côte d'Ivoire",
+      "asset_count": "3",
+      "total_mw": "6.0",
+      "classifications": "industrial,large_commercial"
+    },
+    {
+      "country": "Ghana",
+      "asset_count": "3",
+      "total_mw": "9.1",
+      "classifications": "large_commercial,industrial,mini_grid"
+    },
+    {
+      "country": "Tanzania",
+      "asset_count": "3",
+      "total_mw": "6.3",
+      "classifications": "industrial,mini_grid"
+    },
+    {
+      "country": "South Africa",
+      "asset_count": "3",
+      "total_mw": "27.0",
+      "classifications": "industrial,large_commercial"
+    },
+    {
+      "country": "Senegal",
+      "asset_count": "2",
+      "total_mw": "5.8",
+      "classifications": "industrial,small_commercial"
+    }
+  ],
+  "messages": [],
+  "stdout": "country\tasset_count\ttotal_mw\tclassifications\nNigeria\t12\t36.8\tindustrial,large_commercial,mini_grid\nKenya\t4\t58.1\tlarge_commercial,industrial,grid_connected\nCôte d'Ivoire\t3\t6.0\tindustrial,large_commercial\nGhana\t3\t9.1\tlarge_commercial,industrial,mini_grid\nTanzania\t3\t6.3\tindustrial,mini_grid\nSouth Africa\t3\t27.0\tindustrial,large_commercial\nSenegal\t2\t5.8\tindustrial,small_commercial\n",
+  "stderr": "",
+  "execution_time_ms": 51
+}

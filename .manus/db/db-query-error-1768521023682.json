@@ -1,0 +1,8 @@
+{
+  "query": "SELECT country, COUNT(*) as asset_count, SUM(capacity_mw) as total_mw FROM projects WHERE country IS NOT NULL GROUP BY country ORDER BY asset_count DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.root --database Zma8WcwtXEXyEaiSTraUQs --execute SELECT country, COUNT(*) as asset_count, SUM(capacity_mw) as total_mw FROM projects WHERE country IS NOT NULL GROUP BY country ORDER BY asset_count DESC;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'capacity_mw' in 'where clause'"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "query": "SELECT id, name, code, state, technology, capacityMw, status, stage, latitude, longitude FROM projects LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.root --database Zma8WcwtXEXyEaiSTraUQs --execute SELECT id, name, code, state, technology, capacityMw, status, stage, latitude, longitude FROM projects LIMIT 10;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "Sample Energy Project",
+      "code": "SEP-001",
+      "state": "Lagos",
+      "technology": "PV+BESS",
+      "capacityMw": "10.00",
+      "status": "development",
+      "stage": "feasibility",
+      "latitude": "NULL",
+      "longitude": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tcode\tstate\ttechnology\tcapacityMw\tstatus\tstage\tlatitude\tlongitude\n1\tSample Energy Project\tSEP-001\tLagos\tPV+BESS\t10.00\tdevelopment\tfeasibility\tNULL\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}

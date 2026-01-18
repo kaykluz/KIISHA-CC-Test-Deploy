@@ -1,0 +1,100 @@
+{
+  "query": "SELECT id, name, vatrId, assetType, assetCategory, assetClassification, configurationProfile FROM assets LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.root --database Zma8WcwtXEXyEaiSTraUQs --execute SELECT id, name, vatrId, assetType, assetCategory, assetClassification, configurationProfile FROM assets LIMIT 10;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "INV-RES-001",
+      "vatrId": "VATR-INV-RES-001",
+      "assetType": "inverter",
+      "assetCategory": "generation",
+      "assetClassification": "residential",
+      "configurationProfile": "pv_only"
+    },
+    {
+      "id": "2",
+      "name": "PNL-RES-001",
+      "vatrId": "VATR-PNL-RES-001",
+      "assetType": "panel",
+      "assetCategory": "generation",
+      "assetClassification": "residential",
+      "configurationProfile": "pv_only"
+    },
+    {
+      "id": "3",
+      "name": "BAT-RES-001",
+      "vatrId": "VATR-BAT-RES-001",
+      "assetType": "battery",
+      "assetCategory": "storage",
+      "assetClassification": "residential",
+      "configurationProfile": "pv_bess"
+    },
+    {
+      "id": "4",
+      "name": "INV-SMC-001",
+      "vatrId": "VATR-INV-SMC-001",
+      "assetType": "inverter",
+      "assetCategory": "generation",
+      "assetClassification": "small_commercial",
+      "configurationProfile": "pv_bess"
+    },
+    {
+      "id": "5",
+      "name": "INV-SMC-002",
+      "vatrId": "VATR-INV-SMC-002",
+      "assetType": "inverter",
+      "assetCategory": "generation",
+      "assetClassification": "small_commercial",
+      "configurationProfile": "pv_bess"
+    },
+    {
+      "id": "6",
+      "name": "BAT-SMC-001",
+      "vatrId": "VATR-BAT-SMC-001",
+      "assetType": "battery",
+      "assetCategory": "storage",
+      "assetClassification": "small_commercial",
+      "configurationProfile": "pv_bess"
+    },
+    {
+      "id": "7",
+      "name": "INV-LGC-001",
+      "vatrId": "VATR-INV-LGC-001",
+      "assetType": "inverter",
+      "assetCategory": "generation",
+      "assetClassification": "large_commercial",
+      "configurationProfile": "pv_bess_dg"
+    },
+    {
+      "id": "8",
+      "name": "INV-LGC-002",
+      "vatrId": "VATR-INV-LGC-002",
+      "assetType": "inverter",
+      "assetCategory": "generation",
+      "assetClassification": "large_commercial",
+      "configurationProfile": "pv_bess_dg"
+    },
+    {
+      "id": "9",
+      "name": "GEN-LGC-001",
+      "vatrId": "VATR-GEN-LGC-001",
+      "assetType": "genset",
+      "assetCategory": "generation",
+      "assetClassification": "large_commercial",
+      "configurationProfile": "pv_bess_dg"
+    },
+    {
+      "id": "10",
+      "name": "BAT-LGC-001",
+      "vatrId": "VATR-BAT-LGC-001",
+      "assetType": "battery",
+      "assetCategory": "storage",
+      "assetClassification": "large_commercial",
+      "configurationProfile": "pv_bess_dg"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tvatrId\tassetType\tassetCategory\tassetClassification\tconfigurationProfile\n1\tINV-RES-001\tVATR-INV-RES-001\tinverter\tgeneration\tresidential\tpv_only\n2\tPNL-RES-001\tVATR-PNL-RES-001\tpanel\tgeneration\tresidential\tpv_only\n3\tBAT-RES-001\tVATR-BAT-RES-001\tbattery\tstorage\tresidential\tpv_bess\n4\tINV-SMC-001\tVATR-INV-SMC-001\tinverter\tgeneration\tsmall_commercial\tpv_bess\n5\tINV-SMC-002\tVATR-INV-SMC-002\tinverter\tgeneration\tsmall_commercial\tpv_bess\n6\tBAT-SMC-001\tVATR-BAT-SMC-001\tbattery\tstorage\tsmall_commercial\tpv_bess\n7\tINV-LGC-001\tVATR-INV-LGC-001\tinverter\tgeneration\tlarge_commercial\tpv_bess_dg\n8\tINV-LGC-002\tVATR-INV-LGC-002\tinverter\tgeneration\tlarge_commercial\tpv_bess_dg\n9\tGEN-LGC-001\tVATR-GEN-LGC-001\tgenset\tgeneration\tlarge_commercial\tpv_bess_dg\n10\tBAT-LGC-001\tVATR-BAT-LGC-001\tbattery\tstorage\tlarge_commercial\tpv_bess_dg\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}

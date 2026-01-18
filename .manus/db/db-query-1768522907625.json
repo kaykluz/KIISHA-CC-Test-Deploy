@@ -1,0 +1,19 @@
+{
+  "query": "SELECT VERSION(); SELECT @@version_comment;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.root --database Zma8WcwtXEXyEaiSTraUQs --execute SELECT VERSION(); SELECT @@version_comment;",
+  "rows": [
+    {
+      "VERSION()": "8.0.11-TiDB-v7.5.6-serverless"
+    },
+    {
+      "VERSION()": "@@version_comment"
+    },
+    {
+      "VERSION()": "TiDB Server (Apache License 2.0) Community Edition, MySQL 8.0 compatible"
+    }
+  ],
+  "messages": [],
+  "stdout": "VERSION()\n8.0.11-TiDB-v7.5.6-serverless\n@@version_comment\nTiDB Server (Apache License 2.0) Community Edition, MySQL 8.0 compatible\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}

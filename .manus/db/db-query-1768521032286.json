@@ -1,0 +1,45 @@
+{
+  "query": "SELECT country, COUNT(*) as asset_count, SUM(capacityMw) as total_mw FROM projects WHERE country IS NOT NULL GROUP BY country ORDER BY asset_count DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.root --database Zma8WcwtXEXyEaiSTraUQs --execute SELECT country, COUNT(*) as asset_count, SUM(capacityMw) as total_mw FROM projects WHERE country IS NOT NULL GROUP BY country ORDER BY asset_count DESC;",
+  "rows": [
+    {
+      "country": "Nigeria",
+      "asset_count": "12",
+      "total_mw": "36.80"
+    },
+    {
+      "country": "Kenya",
+      "asset_count": "4",
+      "total_mw": "58.10"
+    },
+    {
+      "country": "South Africa",
+      "asset_count": "3",
+      "total_mw": "27.00"
+    },
+    {
+      "country": "Côte d'Ivoire",
+      "asset_count": "3",
+      "total_mw": "6.00"
+    },
+    {
+      "country": "Ghana",
+      "asset_count": "3",
+      "total_mw": "9.10"
+    },
+    {
+      "country": "Tanzania",
+      "asset_count": "3",
+      "total_mw": "6.30"
+    },
+    {
+      "country": "Senegal",
+      "asset_count": "2",
+      "total_mw": "5.80"
+    }
+  ],
+  "messages": [],
+  "stdout": "country\tasset_count\ttotal_mw\nNigeria\t12\t36.80\nKenya\t4\t58.10\nSouth Africa\t3\t27.00\nCôte d'Ivoire\t3\t6.00\nGhana\t3\t9.10\nTanzania\t3\t6.30\nSenegal\t2\t5.80\n",
+  "stderr": "",
+  "execution_time_ms": 55
+}

@@ -1,0 +1,2 @@
+ALTER TABLE `projects` ADD `couplingTopology` enum('AC_COUPLED','DC_COUPLED','HYBRID_COUPLED','UNKNOWN','NOT_APPLICABLE');--> statement-breakpoint
+ALTER TABLE `projects` ADD `distributionTopology` enum('RADIAL','RING','MESH','STAR','TREE','UNKNOWN','NOT_APPLICABLE');

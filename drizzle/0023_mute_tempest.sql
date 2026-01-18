@@ -1,0 +1,1 @@
+ALTER TABLE `conversationSessions` MODIFY COLUMN `pendingAction` enum('none','confirm_export','confirm_share_dataroom','confirm_delete','confirm_verify','confirm_permission_change','confirm_link_attachment') DEFAULT 'none';

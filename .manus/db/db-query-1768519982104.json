@@ -1,0 +1,26 @@
+{
+  "query": "SELECT 'projects' as tableName, COUNT(*) as count FROM projects UNION ALL SELECT 'assets' as tableName, COUNT(*) as count FROM assets UNION ALL SELECT 'sites' as tableName, COUNT(*) as count FROM sites UNION ALL SELECT 'systems' as tableName, COUNT(*) as count FROM systems;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.root --database Zma8WcwtXEXyEaiSTraUQs --execute SELECT 'projects' as tableName, COUNT(*) as count FROM projects UNION ALL SELECT 'assets' as tableName, COUNT(*) as count FROM assets UNION ALL SELECT 'sites' as tableName, COUNT(*) as count FROM sites UNION ALL SELECT 'systems' as tableName, COUNT(*) as count FROM systems;",
+  "rows": [
+    {
+      "tableName": "systems",
+      "count": "15"
+    },
+    {
+      "tableName": "sites",
+      "count": "5"
+    },
+    {
+      "tableName": "assets",
+      "count": "30"
+    },
+    {
+      "tableName": "projects",
+      "count": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "tableName\tcount\nsystems\t15\nsites\t5\nassets\t30\nprojects\t1\n",
+  "stderr": "",
+  "execution_time_ms": 102
+}
