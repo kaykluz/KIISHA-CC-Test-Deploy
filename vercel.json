@@ -1,0 +1,34 @@
+{
+  "buildCommand": "npm run build:vercel",
+  "outputDirectory": "dist/public",
+  "installCommand": "npm install --legacy-peer-deps",
+  "framework": null,
+  "functions": {
+    "api/trpc/[trpc].ts": {
+      "maxDuration": 30
+    },
+    "api/health.ts": {
+      "maxDuration": 10
+    },
+    "api/storage/[...path].ts": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/trpc/:path*",
+      "destination": "/api/trpc/[trpc]"
+    },
+    {
+      "source": "/api/storage/:path*",
+      "destination": "/api/storage/[...path]"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
