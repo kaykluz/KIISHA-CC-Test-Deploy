@@ -1,0 +1,15 @@
+# Add these FRONTEND environment variables to Vercel
+# Go to: https://vercel.com/solomons-projects-4efa50d3/kiisha-cc-test-deploy/settings/environment-variables
+
+# OAuth Configuration (using placeholder values to prevent errors)
+VITE_OAUTH_PORTAL_URL=https://manus.im/oauth
+VITE_APP_ID=placeholder-app-id-12345
+
+# Optional: If you want to use OAuth authentication later:
+# 1. Sign up at https://manus.im or https://manus.computer
+# 2. Create an OAuth application
+# 3. Replace the placeholder values above with real ones
+
+# Alternative: Use local authentication
+# The app should support local email/password authentication
+# You can sign up directly without OAuth

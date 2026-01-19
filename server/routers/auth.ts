@@ -331,4 +331,139 @@ export const authRouter = router({
       
       return { success: true };
     }),
+
+  /**
+   * Local email/password login
+   */
+  localLogin: publicProcedure
+    .input(z.object({
+      email: z.string().email().transform(e => e.toLowerCase()),
+      password: z.string(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const { email, password } = input;
+
+      // Find user by email
+      const user = await db.getUserByEmail(email);
+      if (!user) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "Invalid email or password",
+        });
+      }
+
+      // Import bcrypt for password verification
+      const bcrypt = await import("bcryptjs");
+      const isValidPassword = await bcrypt.compare(password, user.passwordHash || "");
+
+      if (!isValidPassword) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "Invalid email or password",
+        });
+      }
+
+      // Create session token
+      const token = await sdk.auth.createSessionToken({
+        userId: user.id,
+        organizationId: user.activeOrgId || undefined,
+      });
+
+      // Set cookie
+      ctx.res.setHeader(
+        "Set-Cookie",
+        `${COOKIE_NAME}=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${ONE_YEAR_MS / 1000}`
+      );
+
+      // Log the event
+      await logSecurityEvent("local_login", user.id, { email });
+
+      return {
+        success: true,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+        },
+      };
+    }),
+
+  /**
+   * Local email/password signup
+   */
+  localSignup: publicProcedure
+    .input(z.object({
+      email: z.string().email().transform(e => e.toLowerCase()),
+      password: z.string().min(8),
+      name: z.string().min(1),
+      organizationName: z.string().optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const { email, password, name, organizationName } = input;
+
+      // Check if user already exists
+      const existingUser = await db.getUserByEmail(email);
+      if (existingUser) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "An account with this email already exists",
+        });
+      }
+
+      // Import bcrypt for password hashing
+      const bcrypt = await import("bcryptjs");
+      const passwordHash = await bcrypt.hash(password, 12);
+
+      // Create organization if name provided
+      let orgId: number | undefined;
+      if (organizationName) {
+        const org = await db.createOrganization({
+          name: organizationName,
+          slug: organizationName.toLowerCase().replace(/\s+/g, "-"),
+          status: "active",
+        });
+        orgId = org.id;
+      }
+
+      // Create user
+      const user = await db.createUser({
+        email,
+        name,
+        passwordHash,
+        emailVerified: false,
+        role: "admin",
+        activeOrgId: orgId,
+      });
+
+      // Add user to organization if created
+      if (orgId) {
+        await db.addUserToOrganization(user.id, orgId, "admin");
+      }
+
+      // Create session token
+      const token = await sdk.auth.createSessionToken({
+        userId: user.id,
+        organizationId: orgId,
+      });
+
+      // Set cookie
+      ctx.res.setHeader(
+        "Set-Cookie",
+        `${COOKIE_NAME}=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${ONE_YEAR_MS / 1000}`
+      );
+
+      // Log the event
+      await logSecurityEvent("local_signup", user.id, { email });
+
+      return {
+        success: true,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+        },
+      };
+    }),
 });
