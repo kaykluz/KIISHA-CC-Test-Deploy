@@ -14,11 +14,12 @@ export default function MultiAuthLogin() {
   const [, setLocation] = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   // Local login mutation
-  const localLogin = trpc.auth.localLogin.useMutation({
+  const localLogin = trpc.auth.login.useMutation({
     onSuccess: () => {
       setLocation("/dashboard");
     },
@@ -29,7 +30,7 @@ export default function MultiAuthLogin() {
   });
 
   // Local signup mutation
-  const localSignup = trpc.auth.localSignup.useMutation({
+  const localSignup = trpc.auth.register.useMutation({
     onSuccess: () => {
       setLocation("/dashboard");
     },
@@ -50,7 +51,7 @@ export default function MultiAuthLogin() {
     e.preventDefault();
     setIsLoading(true);
     setError("");
-    await localSignup.mutateAsync({ email, password });
+    await localSignup.mutateAsync({ email, password, name });
   };
 
   const handleOAuthLogin = (provider: string) => {
@@ -190,6 +191,18 @@ export default function MultiAuthLogin() {
 
               <TabsContent value="signup" className="space-y-4">
                 <form onSubmit={handleLocalSignup} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-name">Name</Label>
+                    <Input
+                      id="signup-name"
+                      type="text"
+                      placeholder="Your name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      disabled={isLoading}
+                    />
+                  </div>
                   <div className="space-y-2">
                     <Label htmlFor="signup-email">Email</Label>
                     <Input
