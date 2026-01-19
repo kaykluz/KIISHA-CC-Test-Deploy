@@ -86,10 +86,21 @@ const createOAuthHttpClient = (): AxiosInstance =>
 class SDKServer {
   private readonly client: AxiosInstance;
   private readonly oauthService: OAuthService;
+  public readonly auth: {
+    createSessionToken: (payload: { userId: number; organizationId?: number }) => Promise<string>;
+  };
 
   constructor(client: AxiosInstance = createOAuthHttpClient()) {
     this.client = client;
     this.oauthService = new OAuthService(this.client);
+
+    // Add auth namespace for local authentication
+    this.auth = {
+      createSessionToken: async (payload: { userId: number; organizationId?: number }) => {
+        const { localAuth } = await import("./auth");
+        return localAuth.createSessionToken(payload);
+      }
+    };
   }
 
   private deriveLoginMethod(
@@ -266,9 +277,17 @@ class SDKServer {
   }
 
   async authenticateRequest(req: Request): Promise<User> {
-    // Regular authentication flow
     const cookies = this.parseCookies(req.headers.cookie);
     const sessionCookie = cookies.get(COOKIE_NAME);
+
+    // First, try local authentication
+    const { localAuth } = await import("./auth");
+    const localUser = await localAuth.authenticateRequest(req);
+    if (localUser) {
+      return localUser;
+    }
+
+    // Fall back to Manus OAuth if local auth fails
     const session = await this.verifySession(sessionCookie);
 
     if (!session) {
